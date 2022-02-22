@@ -5,15 +5,23 @@ import zipfile
 VANILLA_BP_URL = "https://aka.ms/behaviorpacktemplate"
 VANILLA_RP_URL = "https://aka.ms/resourcepacktemplate"
 CACHE_DIR = os.environ.get("MC_ADDON_CACHE") or "cache"
-BP_ADDON_DIR = os.environ.get("MC_VANILLA_BP_DIR") or "%s%sBP" % (CACHE_DIR,os.sep)
-RP_ADDON_DIR = os.environ.get("MC_VANILLA_RP_DIR") or "%s%sRP" % (CACHE_DIR,os.sep)
+
+"""
+regolith has filters run in the .regolith/tmp directory, but that's cleared on run.
+It'd be nice if we could persist the vanilla addons longer than a single run if the
+user hasn't specified environment variables where they reside.
+"""
+REGOLITH_CACHE_FILTER_PATH_FROM_TMP="..{sep}cache{sep}github.com{sep}littlechestnutgames{sep}regolith-filters{sep}extend-vanilla-entities{sep}".format(sep=os.sep)
+
+BP_ADDON_DIR = os.environ.get("MC_VANILLA_BP_DIR") or "%s%s%sBP" % (REGOLITH_CACHE_FILTER_PATH_FROM_TMP, CACHE_DIR,os.sep)
+RP_ADDON_DIR = os.environ.get("MC_VANILLA_RP_DIR") or "%s%s%sRP" % (REGOLITH_CACHE_FILTER_PATH_FROM_TMP, CACHE_DIR,os.sep)
 
 PACKFILES = [
     {"url": VANILLA_BP_URL, "name": "Vanilla Behavior Pack", "path": BP_ADDON_DIR},
     {"url": VANILLA_RP_URL, "name": "Vanilla Resource Pack", "path": RP_ADDON_DIR}
 ]
 
-# If a local_settings exists, import it.
+# Maybe in the future, loading up PACKFILES other than the vanilla packfiles?
 if os.path.exists("local_settings.py"):
     try:
         from local_settings import *
