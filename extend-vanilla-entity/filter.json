@@ -1,0 +1,9 @@
+{
+    "filters": [
+        {
+            "runWith": "python",
+            "script": "./extend_vanilla_entities.py",
+            "name": "Extending Vanilla Entities"
+        }
+    ]
+}
