@@ -11,7 +11,15 @@ regolith has filters run in the .regolith/tmp directory, but that's cleared on r
 It'd be nice if we could persist the vanilla addons longer than a single run if the
 user hasn't specified environment variables where they reside.
 """
-REGOLITH_CACHE_FILTER_PATH_FROM_TMP="..{sep}cache{sep}github.com{sep}littlechestnutgames{sep}regolith-filters{sep}extend-vanilla-entities{sep}".format(sep=os.sep)
+REGOLITH_CACHE_FILTER_PATH_FROM_TMP= os.sep.join([
+    "..",
+    "cache",
+    "filters",
+    "github.com",
+    "littlechestnutgames",
+    "regolith-filters",
+    "extend-vanilla-entities"
+]) + os.sep
 
 BP_ADDON_DIR = os.environ.get("MC_VANILLA_BP_DIR") or "%s%s%sBP" % (REGOLITH_CACHE_FILTER_PATH_FROM_TMP, CACHE_DIR,os.sep)
 RP_ADDON_DIR = os.environ.get("MC_VANILLA_RP_DIR") or "%s%s%sRP" % (REGOLITH_CACHE_FILTER_PATH_FROM_TMP, CACHE_DIR,os.sep)
