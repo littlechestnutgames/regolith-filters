@@ -6,19 +6,8 @@ VANILLA_BP_URL = "https://aka.ms/behaviorpacktemplate"
 VANILLA_RP_URL = "https://aka.ms/resourcepacktemplate"
 CACHE_DIR = os.environ.get("MC_ADDON_CACHE") or "cache"
 
-"""
-regolith has filters run in the .regolith/tmp directory, but that's cleared on run.
-It'd be nice if we could persist the vanilla addons longer than a single run if the
-user hasn't specified environment variables where they reside.
-"""
 REGOLITH_CACHE_FILTER_PATH_FROM_TMP= os.sep.join([
-    "..",
-    "cache",
-    "filters",
-    "github.com",
-    "littlechestnutgames",
-    "regolith-filters",
-    "extend-vanilla-entities"
+    "data"
 ]) + os.sep
 
 BP_ADDON_DIR = os.environ.get("MC_VANILLA_BP_DIR") or "%s%s%sBP" % (REGOLITH_CACHE_FILTER_PATH_FROM_TMP, CACHE_DIR,os.sep)
